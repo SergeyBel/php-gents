@@ -1,5 +1,5 @@
 {
-    "name": "SergeyBel/php-gents",
+    "name": "sergey-bel/php-gents",
     "description": "Generate unit tests for php projects automatically",
     "autoload": {
         "psr-4": {
