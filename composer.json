@@ -1,8 +1,9 @@
 {
+    "name": "SergeyBel/php-gents",
+    "description": "Generate unit tests for php projects automatically",
     "autoload": {
         "psr-4": {
-            "Gents\\": "src/",
-            "App\\": "ex/"
+            "Gents\\": "src/"
         }
     },
     "require": {
