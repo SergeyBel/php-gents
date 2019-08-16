@@ -1,0 +1,15 @@
+<?php
+
+class {{ test.getShortClassName() }}Test extends PHPUnit\Framework\TestCase
+{
+    {% for method in test.getMethodsTests() %}{%  include('method_test.twig') with
+        {
+            'method' : method
+        }
+
+    %}
+
+
+    {% endfor %}
+
+}

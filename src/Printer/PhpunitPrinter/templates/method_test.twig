@@ -1,0 +1,23 @@
+public function test{{ method.getName()  }}()
+    {
+        $testExpected = null;
+{% for v in method.getProviders()%}
+        ${{ v.getName() }} = null;
+{% endfor %}
+
+{% for m in method.getMocks()%}
+        ${{ m.getVariable().getName() }} = $this->createMock({{ m.getClassName() }}::class);
+
+    {% if m.getFunctionName() %}
+        ${{ m.getVariable().getName() }}->expects($this->once())
+            ->method('{{ m.getFunctionName() }}')
+            ->with()
+            ->willReturn(null);
+    {% endif %}
+
+{% endfor %}
+
+        ${{ method.getConstructor().getShortClassName() |lower }} = new {{ method.getConstructor().getClassName() }}({% for param in method.getConstructor().getParameters() %}${{ param.getName() }}{% if not loop.last %}, {% endif %}{% endfor %});
+        $testCallResult = ${{ method.getConstructor().getShortClassName() |lower }}->{{ method.getCall().getVariable().getName() }}({% for param in method.getCall().getParameters() %}${{ param.getName() }}{% if not loop.last %}, {% endif %}{% endfor %});
+        $this->assertEquals($testExpected, $testCallResult);
+    }
