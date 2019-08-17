@@ -1,6 +1,6 @@
 public function test{{ method.getName()  }}()
     {
-        $testExpected = null;
+        $expected = null;
 {% for v in method.getProviders()%}
         ${{ v.getName() }} = null;
 {% endfor %}
@@ -18,6 +18,6 @@ public function test{{ method.getName()  }}()
 {% endfor %}
 
         ${{ method.getConstructor().getShortClassName() |lower }} = new {{ method.getConstructor().getClassName() }}({% for param in method.getConstructor().getParameters() %}${{ param.getName() }}{% if not loop.last %}, {% endif %}{% endfor %});
-        $testCallResult = ${{ method.getConstructor().getShortClassName() |lower }}->{{ method.getCall().getVariable().getName() }}({% for param in method.getCall().getParameters() %}${{ param.getName() }}{% if not loop.last %}, {% endif %}{% endfor %});
-        $this->assertEquals($testExpected, $testCallResult);
+        $callResult = ${{ method.getConstructor().getShortClassName() |lower }}->{{ method.getCall().getVariable().getName() }}({% for param in method.getCall().getParameters() %}${{ param.getName() }}{% if not loop.last %}, {% endif %}{% endfor %});
+        $this->assertEquals($expected, $testCallResult);
     }
